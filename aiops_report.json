@@ -1,0 +1,429 @@
+{
+    "summary": {
+        "anomaly_count": 51,
+        "top_errors": [
+            {
+                "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+                "count": 25
+            },
+            {
+                "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+                "count": 13
+            },
+            {
+                "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+                "count": 13
+            }
+        ]
+    },
+    "anomalies": [
+        {
+            "timestamp": "2025-11-12 12:03:52.545000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "7e8e80e952eb9d8e96cf37cb990c801f",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:04:11.918000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "eb0d1cb7c2b70a3a4419f4fe020864d3",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:05:05.230000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "a82b31571c2e99a2e0b6997ebf6740d0",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:05:11.775000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "cb282026e42a31e15dcf0cd5b6588e41",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:05:17.310000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "c522af0d5d513a66d899731cf41b0d29",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:05:36.264000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "105ff52fa7a817cc72eee2fea3f03cd1",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:05:42.613000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "59841961be37c791ccda1086e7b669e5",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:06:10.074000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "004b9f0ff90d970b6ddc75cc782d7898",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:06:16.694000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "ada332145163f631cf81b7206f2e1bdb",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:06:22.610000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "370c191a4a741ce27d9c44a2f1c82cd4",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:06:37.175000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "5796030e36dd1ab60698299a03aac056",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:06:53.289000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "1a244fdc7e56b18315ecf9f7ccf84d09",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:07:02.760000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "f4648ed7515f29bd07633b7e681634ff",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:07:07.397000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "0d11f1dcf3ef720d64b9720f95e0ee4c",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:07:22.936000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "1f38129033665b0248bb572306695036",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:07:31.808000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "fd6b299da6dc8e505f6e8d16be4749dd",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:07:37.474000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "c9b37ec0c8927965ead182ffdad3582b",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:07:58.589000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "fa9528bdb74d74dddeb0e4022aac5d1c",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:08:26.157000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "cc6c2c6f3ae925351f0562c96792e1b0",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:08:28.507000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "7afee129eb9c5d75dec53c1758926fd3",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:08:31.004000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "e227e4f85503593c52084eb5616e13c9",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:08:40.865000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "cd77f1b048e4875032cc26d5d89c9d23",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:08:43.717000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "6561568de35292c382a07ff301801360",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:08:57.356000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "c3359f3b98315ac5bcf480444c81b7de",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:09:11.257000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "86e7a86c4e7db4f2f5e556f590955c62",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:09:25.815000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "39c5c27ce2beee3253cd6ca2aaf6f38e",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:10:00.430000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "668fe9765d62036140bd2a5f66fbb42e",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:10:02.707000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "13f801ad86a146a17f21b2d2f48131f7",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:10:14.401000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "47d489aa32dd4f65e053d8f341d0524c",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:10:43.468000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "4a4ca9dc2bf0757bba0c274f6169d2ac",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:11:15.060000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "350f69cb8a00a0f14d1c5530b72d23fe",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:11:23.336000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "46e48a0393f7e93e42a81c83ed5f9732",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:11:35.847000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "6f56b34b5e54e013993b553f64aece32",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:11:38.185000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "0f3afc9f9116295a1019c6b1d5b163e5",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:11:41.129000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "968d0ddc86f80c1e472335f25a58c999",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:11:43.928000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "a104a85be61cc492756ae0e27954a132",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:11:46.501000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "e7f8bef4eb7495c85b0d941ed7c4b6cd",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:12:03.704000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "c684b1f770abf48afa66391697cd0986",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:12:15.275000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "228e3dbc09acb69df1f1fab08fc3dbf0",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:12:41.832000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "62c8c7119046d6d4d8602518f27e5f32",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:12:50.783000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "8c6d1e9e19a0d2fde7a7e89178c80717",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:12:53.520000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "8598d5d65b3992243072853ea3e3f82b",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:13:05.803000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "5f040ada0f6539d886cb3cf67a1abf7a",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:13:08.092000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "e62a732871f850f6da32780dbbe50308",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:13:19.471000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "758a4e1a19197666b68a3c74323ee316",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:13:34.754000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "34ef552052f5368d5afe7d7735ad0a7e",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:13:37.424000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "cb0ae38c42524ace187d90541a17d894",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:13:48.321000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "01149b772743aa260aaf16d53999ccf4",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:13:50.440000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
+            "trace_id": "1c027d8f56eb05fc2e55bfea8b8f4c41",
+            "suggestion": "accounts: Investigate DB or network connection stability"
+        },
+        {
+            "timestamp": "2025-11-12 12:14:00.500000",
+            "service": "accounts",
+            "level": "WARN",
+            "message": "HHH90000025: H2Dialect does not need to be specified explicitly",
+            "trace_id": "30bcfebd92bebb9d578f348ed0311331",
+            "suggestion": "accounts: Review logs for deeper context"
+        },
+        {
+            "timestamp": "2025-11-12 12:14:02.399000",
+            "service": "accounts",
+            "level": "ERROR",
+            "message": "OOM killer invoked for java PID 1 reason=oom_kill",
+            "trace_id": "e7a219b8f96c53600d5bbedd8f0630a6",
+            "suggestion": "accounts: Review logs for deeper context"
+        }
+    ]
+}

@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: loans
+  config:
+    import: optional:configserver:http://localhost:8071/
+server:
+  port: 8090
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    liveness-state:
+      enabled: true
+    readiness-state:
+      enabled: true
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: true
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+
+info:
+  app:
+    name: loans
+    description: Loans Service
+    version: 1.0.0
+  build:
+    version: 1.0.0
+    time: 2021-07-01T12:00:00Z

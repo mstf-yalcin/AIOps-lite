@@ -1,0 +1,15 @@
+
+server:
+  port:8080
+
+build:
+  version: "1.0"
+
+accounts:
+  message: "Welcome to Accounts related dev APIs "
+  contactDetails:
+    name: "Test"
+    email: "test@dev.com"
+  onCallSupport:
+    - (645) 395-4321
+    - (213) 323-0484

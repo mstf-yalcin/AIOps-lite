@@ -1,0 +1,4 @@
+# LOKI_BASE=http://localhost:3100 TENANT=tenant1
+# SELECTOR={container="gatewayserver-ms"}
+# RANGE=2025-11-12T11:28:08.562877+00:00..2025-11-12T11:43:08.562877+00:00 UTC
+

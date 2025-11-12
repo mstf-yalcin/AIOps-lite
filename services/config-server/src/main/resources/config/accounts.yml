@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+accounts:
+  message: "Welcome to Accounts relateds APIs "
+  contactDetails:
+    name: "Test - Product Owner"
+    email: "test@dev.com"
+  onCallSupport:
+    - (645) 395-4321
+    - (213) 323-0484

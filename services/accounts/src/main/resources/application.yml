@@ -1,0 +1,114 @@
+spring:
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+  application:
+    name: accounts
+  jpa:
+    hibernate:
+      ddl-auto: update
+  sql:
+    init:
+      mode: always
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    liveness-state:
+      enabled: true
+    readiness-state:
+      enabled: true
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+endpoints:
+  shutdown:
+    enabled: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+
+logging:
+  level:
+    com:
+      spring:
+        microservices: debug
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        sliding-window-size: 10
+        permitted-number-of-calls-in-half-open-state: 2
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10000
+
+
+resilience4j.retry:
+  configs:
+    default:
+      max-attempts: 3
+      wait-duration: 100
+      enable-exponential-backoff: true
+      exponential-backoff-multiplier: 2.0
+      ignore-exceptions:
+        - java.lang.NullPointerException
+        - java.lang.IllegalArgumentException
+      retry-exceptions:
+        - java.lang.RuntimeException
+        - java.util.concurrent.TimeoutException
+  instances:
+    retryAccounts:
+      max-attempts: 3
+      wait-duration: 100
+      enable-exponential-backoff: true
+      exponential-backoff-multiplier: 2.0
+      ignore-exceptions:
+        - java.lang.NullPointerException
+      retry-exceptions:
+        - java.lang.RuntimeException
+
+
+resilience4j.ratelimiter:
+  configs:
+    default:
+      limit-for-period: 1
+      limit-refresh-period: 5000
+      timeout-duration: 1000
+
+
+
+info:
+  app:
+    name: accounts
+    description: Accounts Service
+    version: 1.0.0
+  build:
+    version: 1.0.0
+    time: 2021-07-01T12:00:00Z

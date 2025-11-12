@@ -1,0 +1,21 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+server:
+  port:8080
+
+
+
+build:
+  version: "3.0"
+
+accounts:
+  message: "Welcome to Accounts related prod APIs "
+  contactDetails:
+    name: "Test - Dev"
+    email: "test@dev.com"
+  onCallSupport:
+    - (333) 392-6869
+    - (444) 222-1384

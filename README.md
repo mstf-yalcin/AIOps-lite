@@ -27,7 +27,7 @@ AIOps-Lite is a proof-of-concept that demonstrates how production-style observab
 ## Technology Stack
 - **Service layer:** Spring Boot microservices, Spring Cloud Config Server, Eureka service discovery, API Gateway.
 - **Observability:** Prometheus for metrics, Loki (read/write/backend) for logs, Tempo for traces, Grafana for visualization, Alloy as the unified collector/exporter.
-- **Analytics:** Python 3 scripts (`get_prom.py`, `get_loki.py`, `rca_analysis.py`), `pandas`, `scikit-learn` IsolationForest, rule-based RCA suggestions, JSON reporting.
+- **Analytics:** Python 3 scripts (`get_prom.py`, `get_loki.py`, `prepare_data.py`, `rca_analysis.py`), `pandas`, `scikit-learn` IsolationForest, multi-layered RCA suggestions, JSON reporting.
 - **Repository layout:** `services/` (Java services), `ops/logs` and `ops/metrics` (captured telemetry), `docs/` (dashboards, diagrams), `aiops_report.json` (latest report artifact).
 
 ## Setting Up Monitoring Infrastructure
@@ -45,9 +45,13 @@ docker-compose up
 - Grafana dashboards -> http://localhost:3000
 
 ## Workflow
-1. **Metric collection (`get_prom.py`)** - Calls the Prometheus HTTP API with service-specific PromQL templates (error rate, P95 latency, CPU, JVM heap, HikariCP activity). Results are written to `ops/metrics/<service>.txt`, preserving query metadata and sampled datapoints.
-2. **Log collection (`get_loki.py`)** - Streams Loki results per service with pagination, writes normalized log text files under `ops/logs/`, and records the query window, selector, and tenant headers for traceability.
-3. **Anomaly detection & RCA (`rca_analysis.py`)** - Parses structured logs (defaults to `mock_logs.txt` but can ingest merged Loki exports), removes noise, encodes features, and runs an `IsolationForest(contamination=0.08)` to flag anomalies. The script enriches each anomaly with heuristic suggestions and emits `aiops_report.json` summarizing counts, top errors, and per-trace context.
+The entire AIOps pipeline is orchestrated by `main.py` and follows these steps:
+
+1. **Data Collection ('get_loki.py' & 'get_prom.py')**:
+- `get_loki.py`: Fetches log data from Loki, writing it to `ops/logs/<service>.txt`.
+- `get_prom.py`: Fetches metric data from Prometheus-compatible sources, writing it to `ops/metrics/<service>.txt.`
+2. **Data Preparation (`prepare_data.py`)** - Reads the collected raw log and metric files, performs time-based correlation to align log entries with their corresponding metric snapshots, and outputs a unified `correlated_data.csv`.
+3. **Anomaly detection & RCA (`rca_analysis.py`)** - Reads the `correlated_data.csv` (prepared in the previous step), applies multi-layered feature, trains an `IsolationForest` ML model to detect and rank anomalies. The script then generates suggestion, metric-aware RCA suggestions for each anomaly and emits `aiops_report.json` summarizing counts, top errors, and detailed per-trace context.
 4. **Visualization** - Grafana dashboards (referenced in `/docs`) overlay the same Prometheus/Loki/Tempo signals for human validation next to the generated JSON report.
 
 ## Example Output
@@ -72,33 +76,70 @@ docker-compose up
   },
   "anomalies": [
     {
-      "timestamp": "2025-11-12 12:03:52.545000",
-      "service": "accounts",
-      "level": "ERROR",
-      "message": "OOM killer invoked for java PID 1 reason=oom_kill",
-      "trace_id": "7e8e80e952eb9d8e96cf37cb990c801f",
-      "suggestion": "accounts: Review logs for deeper context"
+      "trace_id": "01c84ac0ffdc270cf3ba9c12ba2e9651",
+      "root_cause_service": "accounts",
+      "timestamp": "2025-11-12 12:06:57.181000+00:00",
+      "message": "cardStatus method start | Hibernate: select t1_0.txn_id,t1_0.amount,t1_0.status,t1_0.txn_at from transaction t1_0 where t1_0.account_nbr in (?) | Hibernate: select c1_0.customer_id,c1_0.created_at,c1_0.created_by,c1_0.email,c1_0.mobile_number,c1_0.name,c1_0.updated_at,c1_0.updated_by from customer c1_0 where c1_0.mobile_number=?",
+      "anomaly_score": 0.11903998515966818,
+      "metric_snapshot": {
+        "cpu_usage": 0.95,
+        "error_rate": 0.25,
+        "hikaricp_active": 2.5,
+        "jvm_heap_used_bytes": 1000000000.0,
+        "jvm_heap_max_bytes": 1000000000.0,
+        "latency_p95_ms": 800.0,
+        "throughput_requests_per_second": 1.0
+      },
+      "suggestions": [
+        "accounts: High CPU usage detected (0.95).",
+        "accounts: High JVM heap usage detected (1.00).",
+        "accounts: Elevated error rate detected (0.250)."
+      ],
+      "affected_services": [
+        "accounts"
+      ]
     },
     {
-      "timestamp": "2025-11-12 12:04:11.918000",
-      "service": "accounts",
-      "level": "WARN",
-      "message": "Could not locate PropertySource: I/O error on GET request for \"http://localhost:8071/accounts/default\": Connection refused",
-      "trace_id": "eb0d1cb7c2b70a3a4419f4fe020864d3",
-      "suggestion": "accounts: Investigate DB or network connection stability"
-    }
+      "trace_id": "17408d946a7c7fa8ffe5b54f511210d4",
+      "root_cause_service": "accounts",
+      "timestamp": "2025-11-12 12:04:42.197000+00:00",
+      "message": "supportCase method start | Hibernate: select a1_0.account_number,a1_0.account_type,a1_0.branch_address,a1_0.created_at,a1_0.created_by,a1_0.customer_id,a1_0.updated_at,a1_0.updated_by from accounts a1_0 where a1_0.customer_id=? | Hibernate: select c1_0.customer_id,c1_0.created_at,c1_0.created_by,c1_0.email,c1_0.mobile_number,c1_0.name,c1_0.updated_at,c1_0.updated_by from customer c1_0 where c1_0.mobile_number=?",
+      "anomaly_score": 0.03946812169383174,
+      "metric_snapshot": {
+        "cpu_usage": 0.11,
+        "error_rate": 0.14,
+        "hikaricp_active": 9.5,
+        "jvm_heap_used_bytes": 508000000.0,
+        "jvm_heap_max_bytes": 1000000000.0,
+        "latency_p95_ms": 2200.0,
+        "throughput_requests_per_second": 10.3
+      },
+      "suggestions": [
+        "accounts: High P95 latency detected (2200ms).",
+        "accounts: Elevated error rate detected (0.140).",
+        "accounts: Database connection pool is nearing exhaustion (10 active connections)."
+      ],
+      "affected_services": [
+        "accounts"
+      ]
+    },
   ]
 }
 ```
 
 ## How to Run
+
+### 1. Installation
+First, install the necessary Python libraries from the `requirements.txt` file. It is recommended to do this in a virtual environment.
 ```bash
-# 1) collect metrics (outputs to ops/metrics)
-python get_prom.py
-
-# 2) collect logs from Loki (outputs to ops/logs)
-python get_loki.py
-
-# 3) run anomaly detection + RCA (reads mock_logs.txt, writes aiops_report.json)
-python rca_analysis.py
+pip install -r requirements.txt
 ```
+
+### 2. Execution
+Run the main orchestrator script. This will execute the entire data preparation and analysis pipeline using the mock data provided in the repository.
+```bash
+python main.py
+```
+The script will print its progress for each step and, upon completion, generate two key files:
+- `correlated_data.csv`: The intermediate dataset containing logs and their correlated metrics.
+- `aiops_report.json`: The final analysis report.

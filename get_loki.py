@@ -80,7 +80,7 @@ def fetch_all_with_pagination(base, selector, start_ns, end_ns, out_path):
 
             rows.sort(key=lambda item: item[0])
             for ts, line in rows:
-                out_file.write(f"{_iso_ns(ts)}\t{line}\n")
+                out_file.write(f"{line}\n")
             total += len(rows)
 
             if last_ts is None:

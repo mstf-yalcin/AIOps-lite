@@ -3,14 +3,16 @@ from datetime import datetime, timezone
 
 PROM_URL   = "http://localhost:9090"
 OUTPUT_DIR = "ops/metrics"
-DEFAULT_SERVICES = ["accounts-ms", "loans-ms", "cards-ms", "gatewayserver-ms", "eurekaserver-ms"]
+DEFAULT_SERVICES = ["accounts", "loans", "cards", "gatewayserver", "eurekaserver"]
 
 METRICS = {
-    "error_rate": r'rate(http_server_requests_seconds_count{{{label}="{svc}",status=~"5.."}}[5m])',
-    "latency_p95_ms": r'histogram_quantile(0.95, sum by (le)(rate(http_server_requests_seconds_bucket{{{label}="{svc}"}}[5m]))) * 1000',
-    "cpu_seconds_rate": r'rate(process_cpu_seconds_total{{{label}="{svc}"}}[5m])',
+    "error_rate": r'rate(http_server_requests_seconds_count{{{label}="{svc}",status=~"5.."}}[{rate_window}])',
+    "latency_p95_ms": r'histogram_quantile(0.95, sum by (le)(rate(http_server_requests_seconds_bucket{{{label}="{svc}"}}[{rate_window}]))) * 1000',
+    "cpu_usage": r'process_cpu_usage{{{label}="{svc}"}}',
     "jvm_heap_used_bytes": r'jvm_memory_used_bytes{{{label}="{svc}",area="heap"}}',
+    "jvm_heap_max_bytes": r'jvm_memory_max_bytes{{{label}="{svc}",area="heap"}}',
     "hikaricp_active": r'hikaricp_connections_active{{{label}="{svc}"}}',
+    "throughput_rps": r'sum(rate(http_server_requests_seconds_count{{{label}="{svc}"}}[{rate_window}])) by ({label})',
 }
 
 def _iso(s: int) -> str:
@@ -40,10 +42,11 @@ def query_range(prom_url: str, promql: str, start_s: int, end_s: int, step_s: in
 
 def main():
     ap = argparse.ArgumentParser(description="Fetch service-based metrics from Prometheus")
-    ap.add_argument("--window", type=int, default=900, help="Time window (seconds) - default 900 = 15 min")
-    ap.add_argument("--step", type=int, default=60, help="Sampling step (seconds)")
-    ap.add_argument("--services", type=str, help="Comma-separated service list (e.g. accounts-ms,loans-ms)")
-    ap.add_argument("--label", type=str, default="service", help='Service label name (e.g. "service", "container", "app")')
+    ap.add_argument("--window", type=int, default=900, help="Time window (seconds) - default 900 = 15m")
+    ap.add_argument("--rate-window", type=str, default="5m", help="The time window for rate calculations - default 5m (e.g., '5m', '10m').")
+    ap.add_argument("--step", type=int, default=15, help="Sampling step (seconds) - default 15")
+    ap.add_argument("--services", type=str, help="Comma-separated service list (e.g. accounts,loans)")
+    ap.add_argument("--label", type=str, default="application", help='Service label name (e.g. "service", "container", "app")')
     ap.add_argument("--outdir", type=str, default=OUTPUT_DIR, help="Output directory")
     ap.add_argument("--prom", type=str, default=PROM_URL, help="Prometheus base URL")
     args = ap.parse_args()
@@ -55,7 +58,7 @@ def main():
     start_s = end_s - args.window
 
     print(f"[PROM] base={args.prom} window={_iso(start_s)}..{_iso(end_s)} step={args.step}s")
-    print(f"[CFG]  label={args.label} services={services}")
+    print(f"[CFG]  label={args.label} services={services} rate_window={args.rate_window}")
 
     total_points = 0
     for svc in services:
@@ -66,7 +69,7 @@ def main():
             out.write(f"# RANGE={_iso(start_s)}..{_iso(end_s)} UTC STEP={args.step}s\n\n")
 
             for name, tmpl in METRICS.items():
-                promql = tmpl.format(label=args.label, svc=svc)
+                promql = tmpl.format(label=args.label, svc=svc, rate_window=args.rate_window)
                 try:
                     series = query_range(args.prom, promql, start_s, end_s, args.step)
                     out.write(f"## METRIC: {name}\n")
